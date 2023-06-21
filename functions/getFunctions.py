@@ -1,7 +1,6 @@
 from appCreation import mongoClient
 
 def getByMalId(collection, id):
-    print(collection.capitalize(), id)
     try:
         db = mongoClient["scraper"]
         dbCollection = db[collection.capitalize()]

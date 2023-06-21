@@ -1,7 +1,10 @@
 from appCreation import fastAPI as app
 from functions.statusFunctions import getSearchStatus, getWebsiteStatus
 from typing import Literal
+from api_analytics.fastapi import Analytics
 from functions.getFunctions import getByMalId
+
+app.add_middleware(Analytics, api_key='54494a91-1dee-4eb9-86d1-709d0971bec5')
 
 @app.get("/status", tags=["Basics"])
 def get_status():
