@@ -1,6 +1,7 @@
 from appCreation import fastAPI as app
 from functions.statusFunctions import getSearchStatus, getWebsiteStatus
 from typing import Literal
+from functions.getFunctions import getByMalId
 
 @app.get("/status", tags=["Basics"])
 def get_status():
@@ -9,9 +10,25 @@ def get_status():
         "website": getWebsiteStatus(),
         "api": "OK"
     }
+
 @app.get("/get/{collection}/{mal_id}" , tags=["Items"], summary="Get an item by its MAL ID. Make sure to use the correct collection.")
 def get_by_mal_id(collection: Literal["anime", "eroanime", "manga", "eromanga"], mal_id: int):
-    print(collection, mal_id)
+    data = getByMalId(collection, mal_id)
+    if data is None:
+        return {
+            "status": "NOK",
+            "message": "Item not found. Make sure you are using the correct collection and have the correct MAL ID."
+        }
+    elif data == "Error":
+        return {
+            "status": "NOK",
+            "message": "There was an error retrieving your data. Please try again later."
+        }
+    else:
+        return {
+            "status": "OK",
+            "data": data
+        }
 
 @app.get("/get/{collection}/{anilist_id}" , tags=["Items"], summary="Get an item by its ANILIST ID. Make sure to use the correct collection.")
 def get_by_anilist_id(collection: Literal["anime", "eroanime", "manga", "eromanga"], anilist_id: int):
