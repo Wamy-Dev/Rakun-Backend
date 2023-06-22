@@ -1,8 +1,9 @@
 from pymongo import MongoClient
 from fastapi import FastAPI
+from appConfig import MONGO_URI
 
 def createMongo():
-    client = MongoClient('mongodb+srv://Rakun:Rakun@rakuntest.vwblngb.mongodb.net/test')
+    client = MongoClient(MONGO_URI)
     return client
 
 mongoClient = createMongo()

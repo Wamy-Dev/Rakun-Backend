@@ -5,7 +5,20 @@ from api_analytics.fastapi import Analytics
 from functions.getFunctions import getByMalId, getByAnilistId, getByHashedId
 from fastapi import HTTPException
 from fastapi.responses import FileResponse
-app.add_middleware(Analytics, api_key='54494a91-1dee-4eb9-86d1-709d0971bec5')
+from fastapi.middleware.cors import CORSMiddleware
+from appConfig import FRONTEND_URL, ANALYTICS_API_KEY
+origins = [
+    "http://localhost:3000",
+    FRONTEND_URL
+]
+app.add_middleware(Analytics, api_key=ANALYTICS_API_KEY)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/favicon.ico", tags=["Basics"])
 def favicon():

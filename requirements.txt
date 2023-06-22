@@ -2,3 +2,4 @@ pymongo
 fastapi
 uvicorn[standard]
 fastapi-analytics
+python-dotenv
