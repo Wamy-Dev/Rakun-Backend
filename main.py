@@ -4,9 +4,14 @@ from typing import Literal
 from api_analytics.fastapi import Analytics
 from functions.getFunctions import getByMalId
 from fastapi import HTTPException
+from fastapi.staticfiles import StaticFiles
 
 app.add_middleware(Analytics, api_key='54494a91-1dee-4eb9-86d1-709d0971bec5')
+app.mount("", StaticFiles(directory="static"), name="static")
 
+@app.get("/favicon.ico", tags=["Basics"])
+def favicon():
+    return app.get_static_file("favicon.ico")
 @app.get("/status", tags=["Basics"])
 def get_status():
     return {

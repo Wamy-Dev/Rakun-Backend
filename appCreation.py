@@ -25,7 +25,7 @@ def createFastAPI():
 
         You can find Rakun at https://rakun.app and https://search.rakun.app
         ''',
-        openapi_tags=tags_metadata
+        openapi_tags=tags_metadata,
     )
     return app
 
