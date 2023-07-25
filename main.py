@@ -28,6 +28,10 @@ def favicon():
 def malsync_backup():
     return FileResponse("static/malSyncData.zip")
 
+@app.get("/rakunbackup", tags=["Backups"])
+def rakun_backup():
+    return FileResponse("static/rakunData.zip")
+
 @app.get("/status", tags=["Basics"])
 def get_status():
     return {
