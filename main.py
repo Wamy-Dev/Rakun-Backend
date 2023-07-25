@@ -24,6 +24,10 @@ app.add_middleware(
 def favicon():
     return FileResponse("static/favicon.ico")
 
+@app.get("/malsyncbackup", tags=["Backups"])
+def malsync_backup():
+    return FileResponse("static/malSyncData.zip")
+
 @app.get("/status", tags=["Basics"])
 def get_status():
     return {
